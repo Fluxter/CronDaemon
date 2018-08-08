@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Fluxter</Authors>
+    <Company>Fluxter</Company>
+    <Product>Fluxter.CronManager</Product>
+    <Description>Ein kleiner Wrapper um Cronjobs auszuführen</Description>
+    <PackageProjectUrl>http://github.com/fluxter/CronManager</PackageProjectUrl>
+    <RepositoryUrl>http://github.com/fluxter/CronManager</RepositoryUrl>
+    <PackageTags>Cron Manager Dot Net Linux Crons Scheduler</PackageTags>
+  </PropertyGroup>
+
+</Project>
