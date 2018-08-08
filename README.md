@@ -1,6 +1,9 @@
 # Fluxter CronManager
 A small library for cron like execution
 
+## Installation
+Nuget coming soon.
+
 ## Example
 ### Basic Usage
 ```csharp
