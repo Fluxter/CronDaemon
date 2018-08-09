@@ -7,11 +7,12 @@
 //  <created>09.08.2018 - 18:42</created>
 // ------------------------------------------------------------------------------------------------
 
-namespace Fluxter.CronDaemon
+namespace Fluxter.CronDaemon.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
+    using Abstraction;
 
     public class CronSchedule : ICronSchedule
     {

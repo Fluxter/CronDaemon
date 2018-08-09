@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Fluxter.CronDaemon</id>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <authors>Marcel Kallen, Fluxter.net</authors>
         <owners>fluxter</owners>
         <releaseNotes>Initial release</releaseNotes>

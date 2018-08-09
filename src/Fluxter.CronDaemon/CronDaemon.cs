@@ -13,6 +13,8 @@ namespace Fluxter.CronDaemon
     using System.Collections.Generic;
     using System.Threading;
     using System.Timers;
+    using Abstraction;
+    using Models;
     using Timer = System.Timers.Timer;
 
     public interface ICronDaemon

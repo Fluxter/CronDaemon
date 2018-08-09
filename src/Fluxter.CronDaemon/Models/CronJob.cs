@@ -7,16 +7,11 @@
 //  <created>08.08.2018 - 21:13</created>
 // ------------------------------------------------------------------------------------------------
 
-namespace Fluxter.CronDaemon
+namespace Fluxter.CronDaemon.Models
 {
     using System;
     using System.Threading;
-
-    public interface ICronJob
-    {
-        void execute(DateTime date_time);
-        void abort();
-    }
+    using Abstraction;
 
     public class CronJob : ICronJob
     {
@@ -39,7 +34,7 @@ namespace Fluxter.CronDaemon
         {
             lock (this._lock)
             {
-                if (!this._cron_schedule.isTime(date_time))
+                if (!this._cron_schedule.IsTime(date_time))
                 {
                     return;
                 }

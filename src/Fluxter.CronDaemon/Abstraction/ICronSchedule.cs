@@ -7,7 +7,7 @@
 //  <created>09.08.2018 - 18:42</created>
 // ------------------------------------------------------------------------------------------------
 
-namespace Fluxter.CronDaemon
+namespace Fluxter.CronDaemon.Abstraction
 {
     using System;
 
