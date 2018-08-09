@@ -21,7 +21,7 @@ daemon.Start();
 ```csharp
 namespace Application
 {
-    using Fluxter.CronNet;
+    using Fluxter.CronDaemon;
 
     internal class Program
     {
