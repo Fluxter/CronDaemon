@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxter.CronManager", "Fluxter.CronManager\Fluxter.CronManager.csproj", "{3255B727-B061-4577-94AE-DAD2C7744F74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxter.CronDaemon", "Fluxter.CronDaemon\Fluxter.CronDaemon.csproj", "{30C265C3-5FF4-41DF-8996-D523D4A77B44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3255B727-B061-4577-94AE-DAD2C7744F74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3255B727-B061-4577-94AE-DAD2C7744F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3255B727-B061-4577-94AE-DAD2C7744F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3255B727-B061-4577-94AE-DAD2C7744F74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30C265C3-5FF4-41DF-8996-D523D4A77B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C265C3-5FF4-41DF-8996-D523D4A77B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C265C3-5FF4-41DF-8996-D523D4A77B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C265C3-5FF4-41DF-8996-D523D4A77B44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A49841CB-1E59-4F73-9F6E-874915876888}
+		SolutionGuid = {A3785890-1AA3-493B-B07B-2D6AD89192BA}
 	EndGlobalSection
 EndGlobal

@@ -7,7 +7,7 @@
 //  <created>08.08.2018 - 21:13</created>
 // ------------------------------------------------------------------------------------------------
 
-namespace Fluxter.CronManager
+namespace Fluxter.CronDaemon
 {
     using System;
     using System.Threading;

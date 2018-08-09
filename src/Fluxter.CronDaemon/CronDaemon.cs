@@ -7,7 +7,7 @@
 //  <created>08.08.2018 - 21:13</created>
 // ------------------------------------------------------------------------------------------------
 
-namespace Fluxter.CronManager
+namespace Fluxter.CronDaemon
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,9 @@ namespace Fluxter.CronManager
     public interface ICronDaemon
     {
         void AddJob(string schedule, ThreadStart action);
+
         void Start();
+
         void Stop();
     }
 
@@ -57,13 +59,15 @@ namespace Fluxter.CronManager
 
         private void timer_elapsed(object sender, ElapsedEventArgs e)
         {
-            if (DateTime.Now.Minute != this._last.Minute)
+            if (DateTime.Now.Minute == this._last.Minute)
             {
-                this._last = DateTime.Now;
-                foreach (ICronJob job in this.cron_jobs)
-                {
-                    job.execute(DateTime.Now);
-                }
+                return;
+            }
+
+            this._last = DateTime.Now;
+            foreach (ICronJob job in this.cron_jobs)
+            {
+                job.execute(DateTime.Now);
             }
         }
     }

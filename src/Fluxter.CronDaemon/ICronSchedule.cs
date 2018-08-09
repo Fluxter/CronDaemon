@@ -4,17 +4,17 @@
 //       Copyright (c) fluxter.net. All rights reserved.
 //  </copyright>
 //  <author>Marcel Kallen</author>
-//  <created>08.08.2018 - 21:13</created>
+//  <created>09.08.2018 - 18:42</created>
 // ------------------------------------------------------------------------------------------------
 
-namespace Fluxter.CronManager
+namespace Fluxter.CronDaemon
 {
     using System;
 
     public interface ICronSchedule
     {
-        bool isValid(string expression);
+        bool IsValid(string expression);
 
-        bool isTime(DateTime date_time);
+        bool IsTime(DateTime date);
     }
 }

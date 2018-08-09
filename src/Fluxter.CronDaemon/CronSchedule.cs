@@ -4,30 +4,34 @@
 //       Copyright (c) fluxter.net. All rights reserved.
 //  </copyright>
 //  <author>Marcel Kallen</author>
-//  <created>08.08.2018 - 21:13</created>
+//  <created>09.08.2018 - 18:42</created>
 // ------------------------------------------------------------------------------------------------
 
-namespace Fluxter.CronManager
+namespace Fluxter.CronDaemon
 {
     using System;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
-
 
     public class CronSchedule : ICronSchedule
     {
         private static readonly Regex divided_regex = new Regex(@"(\*/\d+)");
         private static readonly Regex list_regex = new Regex(@"(((\d+,)*\d+)+)");
         private static readonly Regex range_regex = new Regex(@"(\d+\-\d+)\/?(\d+)?");
+
         private static readonly Regex wild_regex = new Regex(@"(\*)");
 
-        private static readonly Regex validation_regex =
-            new Regex(divided_regex + "|" + range_regex + "|" + wild_regex + "|" + list_regex);
+        private static readonly Regex validation_regex = new Regex(divided_regex + "|" + range_regex + "|" + wild_regex + "|" + list_regex);
+
 
         public List<int> days_of_month;
+
         public List<int> days_of_week;
+
         public List<int> hours;
+
         public List<int> minutes;
+
         public List<int> months;
 
         private readonly string _expression;
@@ -42,17 +46,17 @@ namespace Fluxter.CronManager
             this.generate();
         }
 
-        public bool isValid(string expression)
+        public bool IsValid(string expression)
         {
-            MatchCollection matches = validation_regex.Matches(expression);
-            return matches.Count > 0; //== 5;
+            var matches = validation_regex.Matches(expression);
+            return matches.Count > 0; 
         }
 
-        public bool isTime(DateTime date_time)
+        public bool IsTime(DateTime date)
         {
-            return this.minutes.Contains(date_time.Minute) && this.hours.Contains(date_time.Hour) &&
-                   this.days_of_month.Contains(date_time.Day) && this.months.Contains(date_time.Month) &&
-                   this.days_of_week.Contains((int) date_time.DayOfWeek);
+            return this.minutes.Contains(date.Minute) && this.hours.Contains(date.Hour) &&
+                   this.days_of_month.Contains(date.Day) && this.months.Contains(date.Month) &&
+                   this.days_of_week.Contains((int)date.DayOfWeek);
         }
 
         private List<int> divided_array(string configuration, int start, int max)
@@ -79,50 +83,18 @@ namespace Fluxter.CronManager
 
         private void generate()
         {
-            if (!this.isValid())
+            if (!this.IsValid())
             {
                 return;
             }
 
-            MatchCollection matches = validation_regex.Matches(this._expression);
+            var matches = validation_regex.Matches(this._expression);
 
             this.generate_minutes(matches[0].ToString());
-
-            if (matches.Count > 1)
-            {
-                this.generate_hours(matches[1].ToString());
-            }
-            else
-            {
-                this.generate_hours("*");
-            }
-
-            if (matches.Count > 2)
-            {
-                this.generate_days_of_month(matches[2].ToString());
-            }
-            else
-            {
-                this.generate_days_of_month("*");
-            }
-
-            if (matches.Count > 3)
-            {
-                this.generate_months(matches[3].ToString());
-            }
-            else
-            {
-                this.generate_months("*");
-            }
-
-            if (matches.Count > 4)
-            {
-                this.generate_days_of_weeks(matches[4].ToString());
-            }
-            else
-            {
-                this.generate_days_of_weeks("*");
-            }
+            this.generate_hours(matches.Count > 1 ? matches[1].ToString() : "*");
+            this.generate_days_of_month(matches.Count > 2 ? matches[2].ToString() : "*");
+            this.generate_months(matches.Count > 3 ? matches[3].ToString() : "*");
+            this.generate_days_of_weeks(matches.Count > 4 ? matches[4].ToString() : "*");
         }
 
         private void generate_days_of_month(string match)
@@ -175,9 +147,9 @@ namespace Fluxter.CronManager
             return new List<int>();
         }
 
-        private bool isValid()
+        private bool IsValid()
         {
-            return this.isValid(this._expression);
+            return this.IsValid(this._expression);
         }
 
         private List<int> list_array(string configuration)
@@ -216,7 +188,7 @@ namespace Fluxter.CronManager
                 end = int.Parse(split[0]);
                 int divisor = int.Parse(split[1]);
 
-                for (int i = start; i < end; ++i)
+                for (var i = start; i < end; ++i)
                 {
                     if (i % divisor == 0)
                     {
