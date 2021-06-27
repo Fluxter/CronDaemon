@@ -2,7 +2,9 @@
 A small library for cron like execution
 
 ## Installation
-Nuget coming soon.
+`Install-Package Fluxter.CronDaemon`
+or
+`dotnet add package Fluxter.CronDaemon`
 
 ## Example
 ### Basic Usage
