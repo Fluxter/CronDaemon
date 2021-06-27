@@ -28,48 +28,50 @@ namespace Fluxter.CronDaemon
 
     public class CronDaemon : ICronDaemon
     {
-        private readonly List<ICronJob> cron_jobs = new List<ICronJob>();
-        private readonly Timer timer = new Timer(30000);
-        private DateTime _last = DateTime.Now;
+        private List<ICronJob> CronJobs { get; } = new List<ICronJob>();
+
+        private Timer Timer { get; } = new Timer(30000);
+
+        private DateTime LastRun { get; set; } = DateTime.Now;
 
         public CronDaemon()
         {
-            this.timer.AutoReset = true;
-            this.timer.Elapsed += this.timer_elapsed;
+            this.Timer.AutoReset = true;
+            this.Timer.Elapsed += this.timer_elapsed;
         }
 
         public void AddJob(string schedule, ThreadStart action)
         {
             var cj = new CronJob(schedule, action);
-            this.cron_jobs.Add(cj);
+            this.CronJobs.Add(cj);
         }
 
         public void Start()
         {
-            this.timer.Start();
+            this.Timer.Start();
         }
 
         public void Stop()
         {
-            this.timer.Stop();
+            this.Timer.Stop();
 
-            foreach (CronJob job in this.cron_jobs)
+            foreach (CronJob job in this.CronJobs)
             {
-                job.abort();
+                job.Abort();
             }
         }
 
         private void timer_elapsed(object sender, ElapsedEventArgs e)
         {
-            if (DateTime.Now.Minute == this._last.Minute)
+            if (DateTime.Now.Minute == this.LastRun.Minute)
             {
                 return;
             }
 
-            this._last = DateTime.Now;
-            foreach (ICronJob job in this.cron_jobs)
+            this.LastRun = DateTime.Now;
+            foreach (var job in this.CronJobs)
             {
-                job.execute(DateTime.Now);
+                job.Execute(DateTime.Now);
             }
         }
     }

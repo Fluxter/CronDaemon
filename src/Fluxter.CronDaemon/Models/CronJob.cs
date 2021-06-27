@@ -15,43 +15,43 @@ namespace Fluxter.CronDaemon.Models
 
     public class CronJob : ICronJob
     {
-        private readonly ICronSchedule _cron_schedule = new CronSchedule();
+        private ICronSchedule CronSchedule { get; } = new CronSchedule();
 
-        private readonly ThreadStart _thread_start;
+        private ThreadStart ThreadStartInfo;
 
         private readonly object _lock = new object();
 
-        private Thread _thread;
+        private Thread Thread { get; set; }
 
         public CronJob(string schedule, ThreadStart thread_start)
         {
-            this._cron_schedule = new CronSchedule(schedule);
-            this._thread_start = thread_start;
-            this._thread = new Thread(thread_start);
+            this.CronSchedule = new CronSchedule(schedule);
+            this.ThreadStartInfo = thread_start;
+            this.Thread = new Thread(thread_start);
         }
 
-        public void execute(DateTime date_time)
+        public void Execute(DateTime date_time)
         {
             lock (this._lock)
             {
-                if (!this._cron_schedule.IsTime(date_time))
+                if (!this.CronSchedule.IsTime(date_time))
                 {
                     return;
                 }
 
-                if (this._thread.ThreadState == ThreadState.Running)
+                if (this.Thread.ThreadState == ThreadState.Running)
                 {
                     return;
                 }
 
-                this._thread = new Thread(this._thread_start);
-                this._thread.Start();
+                this.Thread = new Thread(this.ThreadStartInfo);
+                this.Thread.Start();
             }
         }
 
-        public void abort()
+        public void Abort()
         {
-            this._thread.Abort();
+            this.Thread.Interrupt();
         }
     }
 }

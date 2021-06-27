@@ -13,7 +13,8 @@ namespace Fluxter.CronDaemon.Abstraction
 
     public interface ICronJob
     {
-        void execute(DateTime date_time);
-        void abort();
+        void Execute(DateTime startTime);
+
+        void Abort();
     }
 }
