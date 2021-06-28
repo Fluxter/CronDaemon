@@ -37,7 +37,7 @@ namespace Fluxter.CronDaemon
         public CronDaemon()
         {
             this.Timer.AutoReset = true;
-            this.Timer.Elapsed += this.timer_elapsed;
+            this.Timer.Elapsed += this.OnTimerElapsed;
         }
 
         public void AddJob(string schedule, ThreadStart action)
@@ -55,13 +55,13 @@ namespace Fluxter.CronDaemon
         {
             this.Timer.Stop();
 
-            foreach (CronJob job in this.CronJobs)
+            foreach (var job in this.CronJobs)
             {
                 job.Abort();
             }
         }
 
-        private void timer_elapsed(object sender, ElapsedEventArgs e)
+        private void OnTimerElapsed(object sender, ElapsedEventArgs e)
         {
             if (DateTime.Now.Minute == this.LastRun.Minute)
             {

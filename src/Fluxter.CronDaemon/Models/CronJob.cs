@@ -45,12 +45,18 @@ namespace Fluxter.CronDaemon.Models
                 }
 
                 this.Thread = new Thread(this.ThreadStartInfo);
+                this.Thread.IsBackground = true;
                 this.Thread.Start();
             }
         }
 
         public void Abort()
         {
+            if (!this.Thread.IsAlive)
+            {
+                return;
+            }
+            
             this.Thread.Interrupt();
         }
     }
